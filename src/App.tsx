@@ -32,7 +32,7 @@ const schedule = {
 };
 
 const App = () => (
-  <div>
+  <div className="min-h-screen bg-gray-50">
     <Banner title={schedule.title} />
     <CourseList courses={schedule.courses} />
   </div>
