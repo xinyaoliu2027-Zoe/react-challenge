@@ -1,6 +1,6 @@
 import { useJsonQuery } from './utilities/fetch';
 import Banner from './components/Banner';
-import CourseList from './components/CourseList';
+import TermPage from './components/TermPage';
 
 interface Course {
   term: string;
@@ -26,7 +26,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Banner title={schedule.title} />
-      <CourseList courses={schedule.courses} />
+      <TermPage courses={schedule.courses} />
     </div>
   );
 };
