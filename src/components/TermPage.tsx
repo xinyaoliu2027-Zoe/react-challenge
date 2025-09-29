@@ -15,15 +15,28 @@ interface TermPageProps {
 
 const TermPage = ({ courses }: TermPageProps) => {
   const [selection, setSelection] = useState('Fall');
+  const [selected, setSelected] = useState<string[]>([]);
 
   const filteredCourses = Object.fromEntries(
     Object.entries(courses).filter(([, course]) => course.term === selection)
   );
 
+  const toggleCourse = (courseId: string) => {
+    setSelected(prev => 
+      prev.includes(courseId)
+        ? prev.filter(id => id !== courseId)
+        : [...prev, courseId]
+    );
+  };
+
   return (
     <div>
       <TermSelector selection={selection} setSelection={setSelection} />
-      <CourseList courses={filteredCourses} />
+      <CourseList 
+        courses={filteredCourses} 
+        selected={selected}
+        toggleCourse={toggleCourse}
+      />
     </div>
   );
 };
