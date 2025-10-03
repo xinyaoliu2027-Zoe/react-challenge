@@ -1,6 +1,8 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useJsonQuery } from './utilities/fetch';
 import Banner from './components/Banner';
 import TermPage from './components/TermPage';
+import CourseForm from './components/CourseForm';
 
 interface Course {
   term: string;
@@ -24,10 +26,15 @@ const App = () => {
   const schedule = json as Schedule;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Banner title={schedule.title} />
-      <TermPage courses={schedule.courses} />
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen bg-gray-50">
+        <Banner title={schedule.title} />
+        <Routes>
+          <Route path="/" element={<TermPage courses={schedule.courses} />} />
+          <Route path="/edit/:courseId" element={<CourseForm courses={schedule.courses} />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 
