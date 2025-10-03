@@ -44,7 +44,8 @@ const TermPage = ({ courses }: TermPageProps) => {
         </button>
       </div>
       <CourseList 
-        courses={filteredCourses} 
+        courses={filteredCourses}
+        allCourses={courses}
         selected={selected}
         toggleCourse={toggleCourse}
       />
