@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useJsonQuery } from './utilities/fetch';
+import { useFirebaseData } from './utilities/useFirebaseData';
 import Banner from './components/Banner';
 import TermPage from './components/TermPage';
 import CourseForm from './components/CourseForm';
@@ -17,13 +17,13 @@ interface Schedule {
 }
 
 const App = () => {
-  const [json, isLoading, error] = useJsonQuery('https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php');
+  const [data, isLoading, error] = useFirebaseData('/');
 
   if (error) return <h1>Error loading course data: {`${error}`}</h1>;
   if (isLoading) return <h1>Loading course data...</h1>;
-  if (!json) return <h1>No course data found</h1>;
+  if (!data) return <h1>No course data found</h1>;
 
-  const schedule = json as Schedule;
+  const schedule = data as Schedule;
 
   return (
     <BrowserRouter>
